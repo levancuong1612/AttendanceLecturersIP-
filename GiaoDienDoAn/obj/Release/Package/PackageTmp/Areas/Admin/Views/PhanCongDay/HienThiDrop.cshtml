@@ -1,0 +1,10 @@
+﻿@model CSDL.EF.TBL_ChiTietCTK
+
+
+<option value="">----Chọn Môn Học----</option>
+@if (ViewBag.MaMonHoc != null) { 
+    foreach(var item in ViewBag.MaMonHoc)
+      {
+        <option value="@item.Value">@item.Text</option>
+      }
+}

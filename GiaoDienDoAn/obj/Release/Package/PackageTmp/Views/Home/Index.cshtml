@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout_user.cshtml";
+}
+@model List<CSDL.ViewModel.ViewThoiKhoaBieu>
+<link href="~/Assets/User/Trangchu.css" rel="stylesheet" />
+<div style="margin:0px;" class="breadcrumb-holder">
+    <h1 class="main-title float-left">Trang Chủ</h1>
+    <div class="clearfix"></div>
+</div>
+<div style="background-color:rgb(165 228 232 / 0.59)" class="content">
+    <h1 style="color: black;">Thời Gian Khóa Điểm Danh</h1>
+    <div class="container">
+        <h1 id="demo"></h1>
+    </div>
+
+    @{ DateTime dt = DateTime.Now;}
+    @foreach (var item in Model)
+    {
+        string tgbd = dt.ToString();
+        string tgkt = dt.ToString();
+        if (item.ThoiGianBatDau <= Convert.ToDateTime(dt) && item.ThoiGianKetThuc >= Convert.ToDateTime(dt) && item.TrangThai == "Chưa dạy")
+        {
+            using (Html.BeginForm("Create", "Home", new { mkgv = item.MaGiangVien,cttkb=item.MaCTTKB }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="container mt-5 d-flex justify-content-center">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-center">
+                            <div class="image"> <img src="~/Img/@item.HinhAnh" class="rounded" width="155"> </div>
+                            <div class="ml-3 w-100">
+                                <h4 class="mb-0 mt-0">@item.TenGiangVien</h4> <span>@item.Ngay</span>
+                                <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                                    <div class="d-flex flex-column"> <span style="font-size:20px" class="articles">Lớp</span> <span class="number1">@item.TenLop</span> </div>
+                                    <div class="d-flex flex-column"> <span style="font-size:20px" class="followers">Tiết</span> <span class="number2">@item.TenTiet</span> </div>
+                                    <div class="d-flex flex-column"> <span style="font-size:20px" class="rating">Phòng</span> <span class="number3">@item.TenPhong</span> </div>
+                                </div>
+
+                                <div class="button mt-2 d-flex flex-row align-items-center">
+                                    <input type="submit" value="Điểm Danh" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+    <br />
+    <br />
+</div>
+<script type="text/javascript">
+    var a = new Date()
+    var ngay = (a.getMonth() + 1) + "/" + a.getDate() + "/" + a.getFullYear();
+    var time = a.getHours() + ":" + a.getMinutes() + ":" + a.getSeconds();
+
+    if (a.getHours() >= 7 && a.getHours()<9 ) {
+        var countDownDate = new Date(ngay + " 7:30:00").getTime();
+    }
+    else
+        if (a.getHours() >= 9 && a.getHours()<12 ) {
+        var countDownDate = new Date(ngay + " 9:30:00").getTime();
+    }
+     else
+     if (a.getHours() >= 13 && a.getHours()<15) {
+        var countDownDate = new Date(ngay + " 13:30:00").getTime();
+     }
+     else
+     if (a.getHours() >= 15 && a.getHours()<18) {
+         var countDownDate = new Date(ngay + " 16:00:00").getTime();
+                }
+     else {
+         var countDownDate = new Date(ngay + " 18:30:00").getTime();
+     }
+    var c = new Date().getDate() + new Date("12:20:00").getTime();
+    // Cập nhật đếm ngược sau mỗi 1 giây
+    var x = setInterval(function () {
+        // Nhận ngày và giờ hôm nay
+        var now = new Date().getTime();
+
+        // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+        var distance = countDownDate - now;
+
+        // Tính toán thời gian cho ngày, giờ, phút và giây
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Xuất kết quả trong phần tử có id = "demo"
+        document.getElementById("demo").innerHTML = minutes + "Phút " + seconds + "Giây ";
+
+        // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "THỜI GIAN ĐIỂM DANH ĐÃ HẾT!!!";
+        }
+    }, 1000);
+</script>

@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewBag.Title = "TKBGV";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewThoiKhoaBieu>
+<div class="breadcrumb-holder">
+
+    @{ var data1 = Model.GroupBy(x => x.TenGiangVien); long? maGV = 0;}
+    @foreach (var item in data1)
+    {
+        maGV = item.First().MaGiangVien;
+        if (item.First().TenGiangVien != null)
+        {
+            maGV = item.First().MaGiangVien;
+            <h1 class="main-title float-left">Lịch Dạy Giảng Viên:@item.First().TenGiangVien</h1>
+        }
+
+    }
+
+
+    <div class="clearfix"></div>
+</div>
+<section style="padding:0px" class="ftco-section">
+    <div class="container">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div style="width:1000px; background-color:#e9ecef; border:none;display:flex;flex-direction: row;" class="card mb-3">
+                <div style="width:200px" class="input-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="singledatepicker" />
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-caret-down"></i>
+                            Lọc
+                        </button>
+                    </div>
+                </div>
+                @using (Html.BeginForm("TKBGV", "ThoiKhoaBieu", FormMethod.Get))
+                {
+
+                    int x = Convert.ToInt32(Model.First().PhanTran);
+
+
+                    int t = Convert.ToInt32(Model.First().PhanTrantruoc);
+                   
+
+                    <div style="width:800px;margin-left:3%" class="input-group">
+
+
+                        <div class="input-group">
+                            <a style="margin-left:2%;margin-right:2%" role="button" href="@Url.Action("TKBGV", "ThoiKhoaBieu", new { MaGV = maGV,ts=t })" class="btn btn-warning">
+                                <span class="btn-label">
+                                </span>Tuần trước
+                            </a>
+                            <a style="margin-left:2%;margin-right:2%" role="button" href="@Url.Action("TKBGV", "ThoiKhoaBieu", new { MaGV = maGV })" class="btn btn-warning">
+                                <span class="btn-label">
+                                </span>Hiện tại
+                            </a>
+                            <a role="button" href="@Url.Action("TKBGV", "ThoiKhoaBieu", new { MaGV = maGV,ts=x })" class="btn btn-success">
+                                Tuần sau
+                                <span class="btn-label btn-label-right">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </a>
+                        </div>
+
+                        
+
+
+                    </div>
+                }
+            </div>
+            <!-- end card-->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center mb-4"></h4>
+                <div class="table-wrap">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr style="border:solid 1px #d6d3d3;background-color:#2a3542; color :#ffffff">
+                                <th style="color :#ffffff ">Ca Dạy</th>
+                                @{int i = 1; var data = Model.GroupBy(x => x.Ngay);
+                                }
+                                @foreach (var item in data)
+                                {
+
+                                    i = i + 1;
+                                    string x = item.First().Ngay.Value.Day.ToString() + "/" + item.First().Ngay.Value.Month.ToString() + "/" + item.First().Ngay.Value.Year.ToString();
+                                    if (i < 8)
+                                    {
+                                        <th style="border:solid 1px #d6d3d3 ; color :#ffffff">Thứ @i <br />@x</th>
+                                    }
+                                    else
+                                    {
+                                        <th style="border:solid 1px #d6d3d3 ; color :#ffffff">Chủ Nhật <br />@x</th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td style="background-color:#2a3542;font-weight:bold;color :#ffffff ">Sáng</td>
+                                @foreach (var item in Model)
+                                {
+                                    string x = item.Ngay.Value.Day.ToString() + "/" + item.Ngay.Value.Month.ToString() + "/" + item.Ngay.Value.Year.ToString();
+                                    if (item.MaCTTKB != null)
+                                    {
+                                        if (item.Buoi == "Sáng")
+                                        {
+
+                                            <td style="border:1px solid black;background-color:#cfb8a8;">
+                                                <div style="height:30%;width:97%;border-bottom:1px solid black ">
+                                                    <div style="margin: 5%; text-align: center">
+                                                        <b>@item.MaCTTKB</b>
+                                                        <br />
+                                                        <b>@item.TenMonHoc</b>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align:left;height:70%;">
+                                                    <div style="height:100%;width:97%;margin:3%">
+                                                        <p> Tiết:@item.TenTiet</p>
+                                                        <p> Lớp:@item.TenLop</p>
+                                                        <p> Phòng:@item.TenPhong</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <td><i class="fa fa-close"></i></td>
+                                    }
+
+                                }
+                            </tr>
+                            <tr>
+                                <td style="background-color:#2a3542;font-weight:bold;color :#ffffff ">Chiều</td>
+                                @foreach (var item in Model)
+                                {
+                                    string x = item.Ngay.Value.Day.ToString() + "/" + item.Ngay.Value.Month.ToString() + "/" + item.Ngay.Value.Year.ToString();
+                                    if (item.MaCTTKB != null)
+                                    {
+                                        if (item.Buoi == "Chiều")
+                                        {
+
+                                            <td style="border:1px solid black;background-color:#cfb8a8;">
+                                                <div style="height:30%;width:97%;border-bottom:1px solid black ">
+                                                    <div style="margin: 5%; text-align: center">
+                                                        <b>@item.MaCTTKB</b>
+                                                        <br />
+                                                        <b>@item.TenMonHoc</b>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align:left;height:70%;">
+                                                    <div style="height:100%;width:97%;margin:3%">
+                                                        <p> Tiết:@item.TenTiet</p>
+                                                        <p> Lớp:@item.TenLop</p>
+                                                        <p> Phòng:@item.TenPhong</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <td><i class="fa fa-close"></i></td>
+                                    }
+
+                                }
+                            </tr>
+                            <tr>
+                                <td style="background-color:#2a3542;font-weight:bold;color :#ffffff ">Tối</td>
+                                @foreach (var item in Model)
+                                {
+                                    string x = item.Ngay.Value.Day.ToString() + "/" + item.Ngay.Value.Month.ToString() + "/" + item.Ngay.Value.Year.ToString();
+                                    if (item.MaCTTKB != null)
+                                    {
+                                        if (item.Buoi == "Tối")
+                                        {
+
+                                            <td style="border:1px solid black;background-color:#cfb8a8;">
+                                                <div style="height:30%;width:97%;border-bottom:1px solid black ">
+                                                    <div style="margin: 5%; text-align: center">
+                                                        <b>@item.MaCTTKB</b>
+                                                        <br />
+                                                        <b>@item.TenMonHoc</b>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align:left;height:70%;">
+                                                    <div style="height:100%;width:97%;margin:3%">
+                                                        <p> Tiết:@item.TenTiet</p>
+                                                        <p> Lớp:@item.TenLop</p>
+                                                        <p> Phòng:@item.TenPhong</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <td><i class="fa fa-close"></i></td>
+                                    }
+
+                                }
+                            </tr>
+
+
+                        </tbody>
+                        <tfoot>
+                            @*<tr>
+                                    <th><a href="#"><i class="fa fa-long-arrow-left"></i> September</a></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><a href="#">November <i class="fa fa-long-arrow-right"></i></a></th>
+                                </tr>*@
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

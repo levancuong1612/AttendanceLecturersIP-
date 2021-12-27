@@ -1,0 +1,16 @@
+E:\GiaoDienDoAn\CSDL\bin\Release\CSDL.dll.config
+E:\GiaoDienDoAn\CSDL\bin\Release\CSDL.dll
+E:\GiaoDienDoAn\CSDL\bin\Release\CSDL.pdb
+E:\GiaoDienDoAn\CSDL\bin\Release\EntityFramework.dll
+E:\GiaoDienDoAn\CSDL\bin\Release\EntityFramework.SqlServer.dll
+E:\GiaoDienDoAn\CSDL\bin\Release\PagedList.dll
+E:\GiaoDienDoAn\CSDL\bin\Release\PagedList.Mvc.dll
+E:\GiaoDienDoAn\CSDL\bin\Release\EntityFramework.xml
+E:\GiaoDienDoAn\CSDL\bin\Release\EntityFramework.SqlServer.xml
+E:\GiaoDienDoAn\CSDL\bin\Release\PagedList.xml
+E:\GiaoDienDoAn\CSDL\bin\Release\PagedList.Mvc.xml
+E:\GiaoDienDoAn\CSDL\obj\Release\CSDL.csproj.CoreCompileInputs.cache
+E:\GiaoDienDoAn\CSDL\obj\Release\CSDL.csproj.CopyComplete
+E:\GiaoDienDoAn\CSDL\obj\Release\CSDL.dll
+E:\GiaoDienDoAn\CSDL\obj\Release\CSDL.pdb
+E:\GiaoDienDoAn\CSDL\obj\Release\CSDL.csproj.AssemblyReference.cache

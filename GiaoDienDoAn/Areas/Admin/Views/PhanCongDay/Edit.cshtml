@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@model CSDL.EF.TBL_PhanCongDay
+<h2>Thay đổi phân công dạy</h2>
+@using (Html.BeginForm("Edit", "PhanCongDay", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<div style="width:40%;margin-left:30%">
+    @Html.Partial("_Notifications")
+    <form action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+
+
+        </div>
+        <div class="modal-body">
+            <label style="color:red">*Lưu ý giảng viên không được dạy cùng 1 môn của 1 lớp trong 1 học kỳ</label>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Giảng Viên</label><br />
+                        @Html.DropDownListFor(model => model.MaGiangVien, null, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaGiangVien, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Môn</label><br />
+                        @Html.DropDownListFor(model => model.MaMonHoc, null, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaMonHoc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Lớp</label><br />
+                        @Html.DropDownListFor(model => model.MaLop, null, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaLop, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Học kỳ</label><br />
+                        @Html.DropDownListFor(model => model.MaHocKy, null, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MaHocKy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input style="background-color:#23adf1;float:left" type="submit" value="Cập Nhật" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+
+}

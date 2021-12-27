@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewTaiKhoan>
+<link href="~/HTML/assets/css/TaiKhoan.css" rel="stylesheet" />
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Tài Khoản</h1>
+
+    <div class="clearfix"></div>
+</div>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+        <div class="row">
+            @foreach(var item in Model)
+            {
+            <div class="col-lg-4">
+                <div class="text-center card-box">
+                    <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="~/Img/@item.HinhAnh" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                            <br />
+                            <br />
+                            <h4>@item.TenGiangVien</h4>
+
+                            <p class="text-muted"> Tài Khoản <span>| </span><span><a href="#" class="text-pink">@item.TaiKhoan</a></span></p>
+                        </div>
+                        <ul class="social-links list-inline">
+                           
+                        </ul>
+                        <a class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light" href="../Admin/GiangVien/ThongTin/@item.MaGiangVien">Xem Thông Tin</a>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+            }
+            
+            <!-- end col -->
+            
+        </div>
+        <!-- end row -->
+       
+        <!-- end row -->
+    </div>
+    <!-- container -->
+</div>

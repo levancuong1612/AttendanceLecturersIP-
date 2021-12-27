@@ -1,0 +1,160 @@
+﻿@model  CSDL.ViewModel.ViewGiangVien 
+@{
+    ViewBag.Title = "ThongTin";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+    
+
+}
+
+
+<link href="~/HTML/assets/css/thongtingvCss.css" rel="stylesheet" />
+
+
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Thông Tin Giảng Viên</h1>
+
+    <div class="clearfix"></div>
+</div>
+
+  
+@using (Html.BeginForm("ThongTin", "GiangVien", FormMethod.Post))
+{
+   
+    string day = Model.NgaySinh.Day.ToString() + "/" + Model.NgaySinh.Month.ToString() + "/" + Model.NgaySinh.Year;
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="main-body">
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">GiangVien</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Thong Tin</li>
+                </ol>
+            </nav>
+            
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="~/Img/@Model.HinhAnh" alt="Admin" class="rounded-circle" width="150">
+                                <div class="mt-3">
+                                    <h4>@Model.TenGiangVien</h4>
+                                    <p class="text-secondary mb-1">@Model.TenKhoa</p>
+                                    <p class="text-secondary mb-1">@Model.TenBoMon</p>
+                                    <p class="text-muted font-size-sm">@Model.DiaChi</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">></svg>Tài Khoản</h6>
+                                <span class="text-secondary">abchlkemnjkl</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"></svg>Mật Khẩu</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info"></svg>Quyền</h6>
+                                <span class="text-secondary">User </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Họ Tên:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.TenGiangVien
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Ngày Sinh:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @day
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Bộ Môn:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.TenBoMon
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">SĐT</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.SDT
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Chức Vụ</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.TenChucVu
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Khoa</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.TenKhoa
+                                </div>
+                            </div>
+                            <hr>
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Địa Chỉ</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.DiaChi
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Trạng Thái:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.TrangThai
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn btn-info " target="__blank" href="../Edit?MaGV=@Model.MaGV">Chỉnh sửa</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

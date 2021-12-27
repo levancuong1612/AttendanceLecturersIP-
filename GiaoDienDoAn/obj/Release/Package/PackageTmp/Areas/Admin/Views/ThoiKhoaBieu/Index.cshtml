@@ -1,0 +1,298 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewThoiKhoaBieu>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Thời Khóa Biểu</h1>
+
+    <div class="clearfix"></div>
+</div>
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fas fa-table"></i> Tiết Học</h3>
+            </div>
+            <div class="card-body">
+                <img style="width:100%;height:100%" src="~/Img/Picture2.png" />
+            </div>
+        </div>
+        <!-- end card-->
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h3><i class="fas fa-table"></i> Chi Tiết Thời Khóa Biểu</h3>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div style=" display:flex;flex-direction: row;" class="card mb-3">
+                    @using (Html.BeginForm("Index", "ThoiKhoaBieu", FormMethod.Get))
+                    {
+                        <div style="width:300px" class="input-group">
+                            <div class="input-group">
+                                @Html.DropDownListFor(model => model.First().TenPhong, null, "Chọn Phòng", new { htmlAttributes = new { @class = "form-control", name = "searchString" } })
+                                @Html.ValidationMessageFor(model => model.First().TenPhong, "", new { @class = "text-danger" })
+                                <input type="submit" value="Lọc" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }
+                    <div style="width:300px;margin-left:3%" class="input-group">
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                @for (int i = 1; i <= 50; i++)
+                                {
+                                    <option selected>Tuần Học @i</option>
+                                }
+                            </select>
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-caret-down"></i>
+                                Lọc
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card-->
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div style=" display:flex;flex-direction: row;" class="card mb-3">
+                    <div style="width:300px" class="input-group">
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                @for (int i = 1; i <= 50; i++)
+                                {
+                                    <option selected>Lớp @i</option>
+                                }
+                            </select>
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-caret-down"></i>
+                                Lọc
+                            </button>
+                        </div>
+                    </div>
+                    <div style="width:300px;margin-left:3%" class="input-group">
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                @for (int i = 1; i <= 50; i++)
+                                {
+                                    <option selected>Giảng Viên @i</option>
+                                }
+                            </select>
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-caret-down"></i>
+                                Lọc
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end card-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div style=" display:flex;flex-direction: row;" class="card mb-3">
+                    @using (Html.BeginForm("Index", "ThoiKhoaBieu", FormMethod.Get))
+                    {
+                        <div style="width:400px;margin-left:0px" class="input-group">
+                            <div class="input-group">
+                                <input type="text" name="searchString" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+                                <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- end card-->
+        </div>
+
+    </div>
+</div>
+<!-- end card-body-->
+<div class="card mb-3">
+    <div class="card-header">
+
+        <div class="card-header">
+            <span class="pull-right">
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user">
+                    <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+                </button>
+            </span>
+            <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        @using (Html.BeginForm("Create", "ThoiKhoaBieu", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <form action="#" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Thêm Giảng Viên</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Giảng Viên</label>
+                                                @Html.DropDownListFor(model => model.First().MaGiangVien, null, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.First().MaGiangVien, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Phân Công</label><br />
+                                                @*@Html.DropDownListFor(model => model.First().MaPhanCong, null, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.First().MaPhanCong, "", new { @class = "text-danger" })*@
+                                                @Html.DropDownListFor(model => model.First().MaPhanCong, new SelectList(""), "--Chọn Lịch Phân Công--", new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Tuần</label>
+                                                @Html.DropDownListFor(model => model.First().Tuan, null, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.First().Tuan, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group">
+                                                <label>Ngày </label><br />
+                                                @*@Html.DropDownListFor(model => model.First().Ngay, null, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.First().Ngay, "", new { @class = "text-danger" })*@
+                                                @Html.DropDownListFor(model => model.First().Ngay, new SelectList(""), "--Chọn Ngày--", new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Tiết</label>
+                                                @Html.DropDownListFor(model => model.First().MaTiet, null, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.First().MaTiet, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Phòng</label>
+                                                @Html.DropDownListFor(model => model.First().MaPhong, null, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.First().MaPhong, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input style="background-color:#3a73d1" type="submit" value="Thêm Giảng Viên" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @Html.Partial("_Notifications")
+    </div>
+    <div class="card-body">
+
+
+        <div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px; text-align: center;width:15%;">Giảng Viên</th>
+                        <th style="border: solid 1px;width:10%; text-align: center">Tuần</th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Ngày</th>
+                        <th style="border: solid 1px; text-align: center;width:10%;">Môn</th>
+                        <th style="border: solid 1px; text-align: center ; width:10%;">Lớp</th>
+                        <th style="border: solid 1px;width:5%; text-align: center;">Thứ</th>
+                        <th style="border: solid 1px;width:5%; text-align: center ">Buổi</th>
+                        <th style="border: solid 1px; width:5%;  text-align: center">Tiết</th>
+                        <th style="border: solid 1px; text-align: center ;width:5%; ">Phòng </th>
+                        <th style="border: solid 1px; text-align: center ;width:10%; ">Thao Tác </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string ngay = item.Ngay.Value.Day.ToString() + "-" + item.Ngay.Value.Month.ToString() + "-" + item.Ngay.Value.Year.ToString();
+                        <tr style="color:black">
+                            <td style="border:solid 1px ; font-weight:normal; text-align: center"><a href="../ThoiKhoaBieu/TKBGV?MaGV=@item.MaGiangVien">@item.TenGiangVien</a> </td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.Tuan</td>
+                            <td style="border: solid 1px; font-weight: normal;text-align: center ">@ngay</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenMonHoc</td>
+                            <td style="border:solid 1px ; font-weight:normal; text-align: center">@item.TenLop </td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.Thu</td>
+                            <td style="border: solid 1px; font-weight: normal;text-align: center ">@item.Buoi</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenTiet</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenPhong</td>
+                            <td style="border: solid 1px;">
+                                <a href="../ThoiKhoaBieu/Edit?MaPC=@item.MaCTTKB" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white;margin-top:10px">
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.MaCTTKB }, new AjaxOptions
+                                         {
+                                         Confirm = "Bạn có muốn xóa Thông Tin này?",
+                                         OnComplete = "$('#row_" + item.MaCTTKB + "').remove()",
+                                        HttpMethod = "Delete"
+                                         })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card-body-->
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#MaGiangVien").change(function () {
+          
+            $.get("/Admin/ThoiKhoaBieu/getListGV", { maGV: $("#MaGiangVien").val() }, function (data) {
+                
+                $("#MaPhanCong").empty();
+                /*  $("#MaCTK").append();*/
+                $("#MaPhanCong").append("<option>" + "--Chọn Lịch Phân Công--" + "</option>")
+                $.each(data, function (index, row) {
+                    $("#MaPhanCong").append("<option value='" + row.MaPhanCong + "'>" + row.GV_MH_LOP + "</option>")
+                });
+            });
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#Tuan").change(function () {
+            $.get("/Admin/ThoiKhoaBieu/getListNgay", { Tuan: $("#Tuan").val() }, function (data) {
+              
+                $("#Ngay").empty();
+                /*  $("#MaCTK").append();*/
+                $("#Ngay").append("<option>" + "--Chọn Chương trình khung--" + "</option>")
+                $.each(data, function (index, row) {
+                    $("#Ngay").append("<option value='" + row + "'>" + row + "</option>")
+                });
+            });
+           
+        });
+    });
+
+</script>

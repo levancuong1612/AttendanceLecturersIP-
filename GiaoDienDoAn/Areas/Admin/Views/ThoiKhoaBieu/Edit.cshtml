@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model CSDL.EF.TBL_ChiTietThoiKhoaBieu
+<div class="modal-content">
+
+    @using (Html.BeginForm("Edit", "ThoiKhoaBieu", FormMethod.Post))
+    {
+       
+        @Html.AntiForgeryToken()
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật thời khóa biểu </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+          
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Tuần</label>
+                            @Html.DropDownListFor(model => model.Tuan, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Tuan, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="form-group">
+                            <label>Ngày </label><br />
+                            @*@Html.DropDownListFor(model => model.First().Ngay, null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.First().Ngay, "", new { @class = "text-danger" })*@
+                            @Html.DropDownListFor(model => model.Ngay, new SelectList(""), "--Chọn Ngày--", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Tiết</label>
+                            @Html.DropDownListFor(model => model.MaTiet, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaTiet, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Phòng</label>
+                            @Html.DropDownListFor(model => model.MaPhong, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaPhong, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input style="background-color:#3a73d1" type="submit" value="Cập Nhật" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    }
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#Tuan").change(function () {
+            $.get("/ThoiKhoaBieu/getListNgay", { maTuan: $("#Tuan").val() }, function (data) {
+                $("#Ngay").empty();
+                /*  $("#MaCTK").append();*/
+                $("#Ngay").append("<option>" + "--Chọn Ngày--" + "</option>")
+                $.each(data, function (index, row) {
+                    $("#Ngay").append("<option value='" + row + "'>" + row + "</option>")
+                });
+            });
+        });
+    });
+
+</script>

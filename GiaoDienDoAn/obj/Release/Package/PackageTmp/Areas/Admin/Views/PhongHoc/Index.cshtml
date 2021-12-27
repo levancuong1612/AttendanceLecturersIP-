@@ -1,0 +1,147 @@
+﻿@*@model CSDL.EF.TBL_PhongHoc*@
+@model List<CSDL.EF.TBL_PhongHoc>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Phòng Học</h1>
+
+    <div class="clearfix"></div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+
+
+        <span class="pull-right">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user">
+                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+            </button>
+        </span>
+        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @using (Html.BeginForm("Create", "PhongHoc", FormMethod.Post))
+                    {
+                       
+                        @Html.AntiForgeryToken()
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm Phòng</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Tên Phòng</label>
+                                            @Html.EditorFor(model => model.First().TenPhong, new { htmlAttributes = new { @class = "form-control", @placeholder = "  Nhập Tên Phòng Học" } })
+                                            @Html.ValidationMessageFor(model => model.First().TenPhong, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Loại</label>
+                                            @Html.DropDownListFor(model => model.First().LoaiPhong, new List<SelectListItem>
+                                             {
+                                                  new SelectListItem{Text="- Chọn loại phòng -",Selected=true},
+                                                  new SelectListItem{Text="Thực Hành",},
+                                                  new SelectListItem{Text="Vi tính",},
+                                                  new SelectListItem{Text="Giảng Đường", },
+                                               }, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.First().LoaiPhong, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Vị trí</label>
+                                            @Html.DropDownListFor(model => model.First().ViTri, new List<SelectListItem>
+                                             {
+                                                  new SelectListItem{Text="- Chọn vị trí -",Selected=true},
+                                                  new SelectListItem{Text="Nhà học A",},
+                                                  new SelectListItem{Text="Nhà học B",},
+                                                  new SelectListItem{Text="Nhà học C",},
+                                                  new SelectListItem{Text="Nhà học D",},
+                                                  new SelectListItem{Text="Nhà học E",},
+                                               }, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.First().LoaiPhong, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input style="background-color:aqua" type="submit" value="Thêm Phòng" class="btn btn-default" />
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+        <h3><i class="fas fa-table"></i> Bảng Phòng</h3>
+        @using (Html.BeginForm("Index", "PhongHoc", FormMethod.Get))
+        {
+            <div style="width:400px;margin-left:0px" class="input-group">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+                    @*<button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-caret-down"></i>
+                            Tìm kiếm
+                        </button>*@
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        @*<th style="border: solid 1px;width:15%; text-align: center">Mã Phòng</th>*@
+                        <th style="border: solid 1px; width:15%;  text-align: center">Tên Phòng</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Loại </th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Vị Trí</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Trạng Thái</th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="color:black">
+                           
+                            <td style="border: solid 1px; font-weight: normal;text-align: center ">@item.TenPhong</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.LoaiPhong</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.ViTri</td>
+                            <td style="border: solid 1px black; font-weight: normal;color:green; text-align: center">@item.TrangThai</td>
+                            <td>
+                                <a href="Edit?MaPhong=@item.MaPhong" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                    <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white">
+                                        
+                                        @Ajax.ActionLink("Xóa", "xoa", new { @id = item.MaPhong }, new AjaxOptions
+                          {
+                              Confirm = "Bạn có muốn xóa phòng này ?",
+                              OnComplete = "$('#row_" + item.MaPhong + "' ).remove()",
+                              HttpMethod = "Delete"
+                          })
+                                    </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- end card-body-->
+
+</div>
+

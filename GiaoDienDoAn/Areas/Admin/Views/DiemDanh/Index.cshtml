@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewDiemDanh>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Điểm Danh</h1>
+
+    <div class="clearfix"></div>
+</div>
+<div class="form-group col-md-4">
+
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <div style="width:500px" class="input-group">
+
+            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Lọc Giảng Viên</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-caret-down"></i>
+                Lọc
+            </button>
+        </div>
+        <div style="margin-left:3%" class="input-group">
+
+            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Học Kỳ</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-caret-down"></i>
+                Lọc
+            </button>
+        </div>
+
+
+        <div style="margin-left:3%" class="input-group">
+
+
+            <a role="button" href="@Url.Action("ChiTietDiemDanh","DiemDanh")" class="btn btn-primary">
+                <span class="btn-label">
+                    <i class="fas fa-check"></i>
+                </span>danh sách chi tiết
+            </a>
+        </div>
+    </div>
+
+    
+
+
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <h3><i class="fas fa-table"></i> Bảng Điểm Đanh Giảng Viên Theo Kỳ</h3>
+        Thông tin điểm danh của giảng viên trong 1 kỳ, bao gồm số ngày vắng và số ngày dạy
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;border:1px solid;width:15%">Tên Giảng Viên</th>
+
+                        <th style="text-align:center;border:1px solid">Học Kỳ</th>
+                        <th style="text-align:center;border:1px solid">Số Lớp Dạy</th>
+                        <th style="text-align:center;border:1px solid">Số Buổi Phân Công</th>
+                        <th style="text-align:center;border:1px solid">Số Tiết Phân Công</th>
+                        <th style="text-align:center;border:1px solid">Số Tiết Hoàn Thành</th>
+                        <th style="text-align:center;border:1px solid;width:7%">Số Giờ Dạy</th>
+                        <th style="text-align:center;border:1px solid;width:7%">Số Buổi Dạy</th>
+                        <th style="text-align:center;border:1px solid;width:7%">Số Buổi Nghỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                    <tr style="border:none;color:black">
+
+                        <td style="text-align: center; font-weight: normal; border: 1px solid"><a style="color: black" href="../DiemDanh/ChiTietDiemDanh?MaDD=@item.MaGiangVien">@item.TenGiangVien</a> </td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.TenHocKy</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoLopPhanCong</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoBuoiPhanCong</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoTietPhanCong</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoTietHoanThanh</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoGioHoanThanh</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoBuoiDay</td>
+                        <td style="text-align: center; font-weight: normal; border: 1px solid">@item.SoBuoiNghi</td>
+                    </tr>
+                    }
+                </tbody>
+                   
+                
+            </table>
+        </div>
+
+    </div>
+    <div style="padding:10px; border:1px solid black">
+       
+        <div><a href="@Url.Action("Report",new {id= "Excel"})"> Xuất Phiếu Thống Kê</a></div>
+        <div><a href="@Url.Action("Report",new {id= "Word"})"> Xuất Phiếu Thống Kê</a></div>
+        <div><a href="@Url.Action("Report",new {id= "Image"})"> Xuất Phiếu Thống Kê</a></div>
+    </div>
+
+</div>

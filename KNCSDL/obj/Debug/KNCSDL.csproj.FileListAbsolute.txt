@@ -1,0 +1,12 @@
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\KNCSDL.dll.config
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\KNCSDL.dll
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\KNCSDL.pdb
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\EntityFramework.dll
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\EntityFramework.SqlServer.dll
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\EntityFramework.xml
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\bin\Debug\EntityFramework.SqlServer.xml
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\obj\Debug\KNCSDL.csprojAssemblyReference.cache
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\obj\Debug\KNCSDL.csproj.CoreCompileInputs.cache
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\obj\Debug\KNCSDL.csproj.CopyComplete
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\obj\Debug\KNCSDL.dll
+F:\BaiThucHanhMVC\GiaoDienDoAn\KNCSDL\obj\Debug\KNCSDL.pdb

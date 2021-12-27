@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model CSDL.EF.TBL_GiangVien
+<h2>Edit</h2>
+
+
+    @using (Html.BeginForm("Edit", "GiangVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Sửa Giảng Viên</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Tên Giảng Viên</label>
+
+                            @Html.EditorFor(model => model.TenGiangVien, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TenGiangVien, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Giới Tính</label>
+                            @Html.DropDownListFor(model => model.GioiTinh, new List<SelectListItem>
+                              {
+                                   new SelectListItem{Text="- Chọn Giới Tính -",Selected=true},
+                                   new SelectListItem{Text="Nam",},
+                                   new SelectListItem{Text="Nữ",},
+                                }, htmlAttributes: new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="form-group">
+                            <label>Ngày Sinh</label>
+                            @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Địa Chỉ</label>
+                            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Số Điện Thoại</label>
+                            @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control", @inputmode = "tel" } })
+                            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Hình Ảnh</label>
+                            <input type="file" name="file" id="file" style="width: 100%;" />
+                            @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Khoa</label><br />
+                            @Html.DropDownListFor(model => model.MaKhoa, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaKhoa, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Chức Vụ</label><br />
+                            @Html.DropDownListFor(model => model.MaChucVu, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaChucVu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Bộ Môn</label>
+                            @Html.DropDownListFor(model => model.MaBoMon, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaBoMon, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Trạng Thái</label>
+                            @Html.DropDownListFor(model => model.TrangThai, new List<SelectListItem>
+              {
+                   new SelectListItem{Text="- Chọn Trạng Thái -",Selected=true},
+                   new SelectListItem{Text="Đang Dạy",},
+                   new SelectListItem{Text="Ngưng Dạy",},
+
+                }, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input style="background-color:#3a73d1" type="submit" value="Thêm Giảng Viên" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    }
+

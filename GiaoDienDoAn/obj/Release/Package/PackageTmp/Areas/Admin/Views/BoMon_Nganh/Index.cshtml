@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewBoMon_ChuyenNganh>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Bộ Môn - Chuyên Ngành</h1>
+    <div class="clearfix"></div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <span class="pull-right">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user">
+                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+            </button>
+        </span>
+        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @using (Html.BeginForm("CreateCN", "BoMon_Nganh", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm Ngành</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Tên Ngành</label>
+                                            @Html.EditorFor(model => model.First().TenChuyenNganh, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().TenChuyenNganh, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Thêm Ngành Mới" class="btn btn-default" />
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+        <h3><i class="fas fa-table"></i> Bảng Chuyên Ngành</h3>
+        @using (Html.BeginForm("Index", "BoMon_Nganh", FormMethod.Get))
+        {
+            <div style="width:400px;margin-left:0px" class="input-group">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px;width:15%; text-align: center">Mã Ngành</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Tên Ngành</th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var data = Model.GroupBy(x => x.MaChuyenNganh);
+
+                        foreach (var item in data)
+                        {
+                            <tr style="color:black">
+                                <td style="border: solid 1px; font-weight: normal; text-align: center">@item.First().MaChuyenNganh</td>
+                                <td style="border: solid 1px; font-weight: normal;text-align: center ">@item.First().TenChuyenNganh</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                    <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white">
+
+                                        @Ajax.ActionLink("Xóa", "DeleteCN", new { @id = item.First().MaChuyenNganh }, new AjaxOptions
+                                        {
+                                          Confirm = "Bạn có muốn xóa Khoa này ?",
+                                          OnComplete = "$('#row_" + item.First().MaChuyenNganh + "' ).remove()",
+                                          HttpMethod = "Delete"
+                                          })
+                                    </div>
+                                </td>
+                            </tr>
+                        }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card-body-->
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <span class="pull-right">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user1">
+                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+            </button>
+        </span>
+        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @using (Html.BeginForm("CreateBM", "BoMon_Nganh", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm Môn Học</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Tên Môn</label>
+                                            @Html.EditorFor(model => model.First().TenMonHoc, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().TenMonHoc, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Số tín chỉ</label>
+                                            @Html.EditorFor(model => model.First().SoTinChi, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().SoTinChi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Loại</label>
+                                            @Html.DropDownListFor(model => model.First().Loai, new List<SelectListItem>
+                                                              {
+                                                                   new SelectListItem{Text="- Chọn Loại-",Selected=true},
+                                                                   new SelectListItem{Text="Lý Thuyết",},
+                                                                   new SelectListItem{Text="Thực Hành",},
+                                                                }, htmlAttributes: new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Chuyên Ngành</label>
+                                            @Html.DropDownListFor(model => model.First().MaChuyenNganh, null, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().MaChuyenNganh, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Thêm Môn Học " class="btn btn-default" />
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+        <h3><i class="fas fa-table"></i> Bảng Môn </h3>
+        @using (Html.BeginForm("Index", "BoMon_Nganh", FormMethod.Get))
+        {
+            <div style="width:400px;margin-left:0px" class="input-group">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px;width:15%; text-align: center">Mã Môn</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Tên Môn</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Số Tín Chỉ </th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Chuyên Ngành</th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Loại</th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="color:black">
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.MaMonHoc</td>
+                            <td style="border: solid 1px; font-weight: normal;text-align: center ">@item.TenMonHoc</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.SoTinChi</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenChuyenNganh</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.Loai</td>
+                            <td>
+                                <a href="../BoMon_Nganh/Edit?MaMonHoc=@item.MaMonHoc" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white">
+
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.MaMonHoc }, new AjaxOptions
+                                    {
+                                      Confirm = "Bạn có muốn xóa Khoa này ?",
+                                      OnComplete = "$('#row_" + item.MaMonHoc + "' ).remove()",
+                                      HttpMethod = "Delete"
+                                      })
+                                </div>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card-body-->
+</div>

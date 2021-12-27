@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "EditPass";
+    Layout = "~/Views/Shared/_layout_user.cshtml";
+}
+@model CSDL.EF.TBL_TaiKhoan
+<h2>Thay Đổi Mật Khẩu</h2>
+@Html.Partial("_Notifications")
+<div class="modal-content">
+    @using (Html.BeginForm("EditPass", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <form   action="#" method="post" enctype="multipart/form-data">
+
+            <div   class="modal-body">
+                
+                <div  class="row">
+                  
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Nhập Mật Khẩu Mới</label><br />
+                            @Html.EditorFor(model => model.MatKhau, null, new { htmlAttributes = new { @class = "form-control" ,@type="password"} })
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input style="background-color:#23adf1"  type="submit" value="Cập Nhật" class="btn btn-default" />
+            </div>
+        </form>
+    }
+</div>

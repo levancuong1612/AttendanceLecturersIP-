@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+@model CSDL.EF.TBL_Tuan
+<h2>Chỉnh Sửa</h2>
+<div class="modal-content">
+
+    @using (Html.BeginForm("Edit", "TuanHoc", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập Nhật Lịch Tuần</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Trạng Thái</label>
+                            @Html.EditorFor(model => model.TrangThai, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+           
+                <div class="modal-footer">
+                    <input type="submit" value="Thêm" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    }
+</div>

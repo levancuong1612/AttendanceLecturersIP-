@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model CSDL.EF.TBL_PhongHoc
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "PhongHoc", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <form action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+            <h5 class="modal-title">Thêm Phòng</h5>
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Tên Phòng</label>
+                        @Html.EditorFor(model => model.TenPhong, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenPhong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Loại</label>
+                        @Html.DropDownListFor(model => model.LoaiPhong, new List<SelectListItem>
+                         {
+                              new SelectListItem{Text="- Chọn loại phòng -",Selected=true},
+                              new SelectListItem{Text="Thực Hành",},
+                              new SelectListItem{Text="Vi tính",},
+                              new SelectListItem{Text="Giảng Đường", },
+                           }, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LoaiPhong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Vị trí</label>
+                        @Html.DropDownListFor(model => model.ViTri, new List<SelectListItem>
+                         {
+                              new SelectListItem{Text="- Chọn vị trí -",Selected=true},
+                              new SelectListItem{Text="Nhà học A",},
+                              new SelectListItem{Text="Nhà học B",},
+                              new SelectListItem{Text="Nhà học C",},
+                              new SelectListItem{Text="Nhà học D",},
+                              new SelectListItem{Text="Nhà học E",},
+                           }, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ViTri, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Tên Phòng</label>
+                        @Html.DropDownListFor(model => model.TrangThai, new List<SelectListItem>
+                         {
+                              new SelectListItem{Text="- Chọn Trạng Thái -",Selected=true},
+                              new SelectListItem{Text="Đang Hoạt Động",},
+                              new SelectListItem{Text="Sửa Chữa",},
+                      
+                           }, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input style="background-color:aqua" type="submit" value="Thêm Phòng" class="btn btn-default" />
+        </div>
+    </form>
+
+}

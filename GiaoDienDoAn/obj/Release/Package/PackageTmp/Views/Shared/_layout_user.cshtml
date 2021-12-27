@@ -1,0 +1,310 @@
+﻿
+@{
+    Layout = null;
+    var session = Session["USER_SESSION"] as GiaoDienDoAn.Common.UserLogin;
+}
+
+
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta name="description" content="Dashboard | Nura Admin">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your website">
+
+
+
+    <!--Css của bảng tkb-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @*<link rel="stylesheet" href="~/HTML/assets2/css/style.css">*@
+    <link href="~/HTML/style.css" rel="stylesheet" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/HTML/assets/images/favicon.ico">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/HTML/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome CSS -->
+    <link href="~/HTML/assets/font-awesome/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="~/HTML/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="~/HTML/assets/plugins/datetimepicker/css/daterangepicker.css" rel="stylesheet" />
+    <!-- BEGIN CSS for this page -->
+    <link rel="stylesheet" type="text/css" href="~/HTML/assets/plugins/chart.js/Chart.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/HTML/assets/plugins/datatables/datatables.min.css" />
+    <!-- END CSS for this page -->
+</head>
+
+<body class="adminbody">
+
+    <div id="main">
+
+        <!-- top bar navigation -->
+        <div class="headerbar">
+
+            <!-- LOGO -->
+            <div class="headerbar-left">
+                <a href="index.html" class="logo">
+                    <img alt="Logo" src="~/HTML/assets/images/logo.png" />
+                    <span>QLGiảng Viên</span>
+                </a>
+            </div>
+
+            <nav class="navbar-custom">
+
+                <ul class="list-inline float-right mb-0">
+                 
+
+
+                    <li class="list-inline-item dropdown notif">
+                        <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-sm">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5>
+                                    <small>Settings</small>
+                                </h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="#" class="dropdown-item notify-item">
+                                <p class="notify-details ml-0">
+                                    <i class="fas fa-cog"></i>
+                                    <b>Settings 1</b>
+                                </p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="#" class="dropdown-item notify-item">
+                                <p class="notify-details ml-0">
+                                    <i class="fas fa-cog"></i>
+                                    <b>Settings 2</b>
+                                </p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="#" class="dropdown-item notify-item">
+                                <p class="notify-details ml-0">
+                                    <i class="fas fa-cog"></i>
+                                    <b>Settings 3</b>
+                                </p>
+                            </a>
+
+                        </div>
+
+                    </li>
+
+
+                    <li class="list-inline-item dropdown notif">
+                        <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="false">
+                            <img src="~/Img/@session.HinhAnh" alt="Profile image" class="avatar-rounded">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="text-overflow">
+                                    <small>Hello, @session.TaiKhoan</small>
+                                </h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="@Url.Action("EditPass","Home",new { id =session.ID})" class="dropdown-item notify-item">
+                                <i class="fas fa-user"></i>
+                                <span>Đổi Mật Khẩu</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="../Login/LogOut" class="dropdown-item notify-item">
+                                <i class="fas fa-power-off"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+        <!-- End Navigation -->
+        <!-- Left Sidebar -->
+        <div class="left main-sidebar">
+            
+            <div class="sidebar-inner leftscroll">
+
+                <div id="sidebar-menu">
+
+                    <ul>
+                        <li class="submenu">
+                            <a href="@Url.Action("Index", "Home", new { tk = session.TaiKhoan })">
+
+                                <i class="fas fa-bars"></i>
+                                <span> Trang Chủ </span>
+                            </a>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="@Url.Action("Index", "ThoiKhoaBieu", new { MaGV = session.MaGV })">
+                                <i class="fas fa-user"></i>
+                                <span> Thời khóa biểu</span>
+                            </a>
+                        </li>
+                        <li class="submenu">
+                            <a href="@Url.Action("ChiTietDiemDanhUS", "ThoiKhoaBieu", new { MaDD = session.MaGV })">
+                                <i class="fas fa-user"></i>
+                                <span> Chi tiết điểm danh</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="content-page">
+
+            <!-- Start content -->
+            <div class="content">
+                @RenderBody()
+
+                <!-- END container-fluid -->
+
+            </div>
+            <!-- END content -->
+
+        </div>
+        <!-- END content-page -->
+
+        <footer class="footer">
+
+            <span class="float-right">
+                <!-- Copyright footer link MUST remain intact if you download free version. -->
+                <!-- You can delete the links only if you purchased the pro or extended version. -->
+                <!-- Purchase the pro or extended version with PHP version of this template: https://bootstrap24.com/template/nura-admin-4-free-bootstrap-admin-template -->
+            </span>
+        </footer>
+
+        <script src="~/HTML/assets/js/modernizr.min.js"></script>
+        <script src="~/HTML/assets/js/jquery.min.js"></script>
+        <script src="~/HTML/assets/js/moment.min.js"></script>
+
+        <script src="~/HTML/assets/js/popper.min.js"></script>
+        <script src="~/HTML/assets/js/bootstrap.min.js"></script>
+
+        <script src="~/HTML/assets/js/detect.js"></script>
+        <script src="~/HTML/assets/js/fastclick.js"></script>
+        <script src="~/HTML/assets/js/jquery.blockUI.js"></script>
+        <script src="~/HTML/assets/js/jquery.nicescroll.js"></script>
+        <script src="~/HTML/assets/data/data_charts_dashboard.js"></script>
+
+        <script src="~/HTML/assets/plugins/datatables/datatables.min.js"></script>
+        <!-- dataTabled data -->
+        <script src="~/HTML/assets/data/data_datatables.js"></script>
+
+
+
+    </div>
+    <!-- END main -->
+    <!-- BEGIN Java Script for this page -->
+    <script src="~/HTML/assets/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/HTML/assets/plugins/datatables/datatables.min.js"></script>
+    <script src="~/HTML/assets/js/admin.js"></script>
+    <!-- Counter-Up-->
+    <script src="~/HTML/assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="~/HTML/assets/plugins/counterup/jquery.counterup.min.js"></script>
+    @*<script src="~/HTML/assets2/js/JS.js"></script>*@
+    <!-- dataTabled data -->
+    <script src="~/HTML/assets/data/data_datatables.js"></script>
+
+    <!-- Charts data -->
+    <script src="~/HTML/assets/data/data_charts_dashboard.js"></script>
+    <script src="~/HTML/assets/plugins/datetimepicker/js/daterangepicker.js"></script>
+
+    <script>
+        $(function () {
+            // Date Range Picker
+            $('input[name="daterange"]').daterangepicker();
+
+            // Date and Time Picker
+            $('input[name="daterange"]').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY h:mm A'
+                }
+            });
+
+            // Single Date Picker
+            $('input[name="singledatepicker"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true
+            });
+
+            // Predefined Ranges
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
+                        'month').endOf('month')]
+                }
+            }, cb);
+            cb(start, end);
+        });
+    </script>
+    <script>
+        $(document).on('ready', function () {
+            var table = $('#dataTable').DataTable({
+               /* data: dataSet*/
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

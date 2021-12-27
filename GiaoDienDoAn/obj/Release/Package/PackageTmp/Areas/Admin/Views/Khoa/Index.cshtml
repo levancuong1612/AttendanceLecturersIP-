@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewKhoa>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Khoa</h1>
+    <br />
+    <div class="clearfix">Tổng Số:@Model.Count()</div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <span class="pull-right">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user1">
+                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+            </button>
+        </span>
+        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    @using (Html.BeginForm("Create", "Khoa", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm Khoa</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Tên Khoa</label>
+                                            @Html.EditorFor(model => model.First().TenKhoa, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().TenKhoa, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Vị Trí</label>
+                                            @Html.DropDownListFor(model => model.First().MaPhong, null, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().MaPhong, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="Thêm" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+        <h3><i class="fas fa-table"></i> Bảng Khoa</h3>
+        @using (Html.BeginForm("Index", "Khoa", FormMethod.Get))
+        {
+            <div style="width:400px;margin-left:0px" class="input-group">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+                    
+                    <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px;width:15%; text-align: center">Mã Khoa</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Tên Phòng</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Vị Trí</th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr style="color:black">
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.MaKhoa</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenKhoa</td>
+                            <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenPhong</td>
+                            <td>
+                                <a href="Edit?MaKhoa=@item.MaKhoa" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white">
+
+                                    @Ajax.ActionLink("Xóa", "xoa", new { @id = item.MaKhoa }, new AjaxOptions
+                      {
+                          Confirm = "Bạn có muốn xóa Khoa này ?",
+                          OnComplete = "$('#row_" + item.MaKhoa + "' ).remove()",
+                          HttpMethod = "Delete"
+                      }
+                     )
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- end card-body-->
+
+</div>
+

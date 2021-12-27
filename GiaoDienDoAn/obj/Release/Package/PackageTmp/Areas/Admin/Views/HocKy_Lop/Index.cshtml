@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewLop>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Học Kỳ-Lớp Học</h1>
+    <div class="clearfix"></div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <h3><i class="fas fa-table"></i> Bảng Học Kỳ</h3>
+        <div style="width:400px;margin-left:0px" class="input-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-caret-down"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+        <label style="color:red">*Học kỳ sẽ được tự động cập nhật mỗi năm</label>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px;width:15%; text-align: center">Mã Học Kỳ</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Tên Học Kì</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Năm </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="color:black">
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">HK001</td>
+                        <td style="border: solid 1px; font-weight: normal;text-align: center ">Học Kỳ 1-2020</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">2020</td>
+                    </tr>
+                    <tr style="color:black">
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">HK002</td>
+                        <td style="border: solid 1px; font-weight: normal;text-align: center ">Học Kỳ 2-2020</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">2020</td>
+                    </tr>
+                    <tr style="color:black">
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">HK003</td>
+                        <td style="border: solid 1px; font-weight: normal;text-align: center ">Học Kỳ 1-2021</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">2021</td>
+                    </tr>
+                    <tr style="color:black">
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">HK004</td>
+                        <td style="border: solid 1px; font-weight: normal;text-align: center ">Học Kỳ 2-2021</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">2021</td>
+                    </tr>
+                    <tr style="color:black">
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">HK005</td>
+                        <td style="border: solid 1px; font-weight: normal;text-align: center ">Học Kỳ 1-2022</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">2022</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card-body-->
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+    <span class="pull-right">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user1">
+                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+            </button>
+        </span>
+        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @using (Html.BeginForm("Create","HocKy_Lop",FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm Lớp</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Tên Lớp</label>
+                                            @Html.EditorFor(model => model.First().TenLop, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().TenLop, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Số lượng</label>
+                                            @Html.EditorFor(model => model.First().SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().SoLuong, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Chuyên ngành</label>
+                                            @Html.DropDownListFor(model => model.First().MaChuyenNganh, null, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().MaChuyenNganh, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Khoa</label>
+                                            @Html.DropDownListFor(model => model.First().MaKhoa, null, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.First().MaKhoa, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input style="background-color:#23adf1" type="submit" value="Thêm Lớp" class="btn btn-default" />
+                            </div>
+                        </form>
+                    }
+                    </div>
+            </div>
+        </div>
+        <h3><i class="fas fa-table"></i> Bảng Lớp</h3>
+        <div style="width:400px;margin-left:0px" class="input-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="fas fa-caret-down"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px;width:15%; text-align: center">Mã Lớp</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Tên Lớp</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Số Lượng </th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Khoa</th>
+                        <th style="border: solid 1px; width:15%;  text-align: center">Chuyên Ngành </th>
+                        <th style="border: solid 1px; width:10%;  text-align: center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                    <tr style="color:black">
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">@item.MaLop</td>
+                        <td style="border: solid 1px; font-weight: normal;text-align: center ">@item.TenLop</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">@item.SoLuong</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenKhoa</td>
+                        <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TenChuyenNganh</td>
+                        <td>
+                            <a href="../HocKy_Lop/Edit?MaLop=@item.MaLop" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                            <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white">
+
+                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.MaLop }, new AjaxOptions
+                                {
+                                  Confirm = "Bạn có muốn xóa Khoa này ?",
+                                  OnComplete = "$('#row_" + item.MaLop + "' ).remove()",
+                                  HttpMethod = "Delete"
+                                  })
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card-body-->
+</div>

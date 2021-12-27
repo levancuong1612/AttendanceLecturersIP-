@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietDiemDanh";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model  List<CSDL.ViewModel.ViewChiTietDiemDanh>
+@{ var data1 = Model.Where(x => x.ChiTieu != null);}
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Chi Tiết Điểm Danh</h1>
+
+    <div class="clearfix"></div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-danger">
+            <h6 style="text-align:center" class="text-white text-uppercase m-b-20">Thông tin GV</h6>
+
+            <div class="m-b-20 text-white counter">
+                <h1 style="font-size:20px">Họ Tên:@Model.First().TenGiangVien</h1>
+
+            </div>
+
+            @*<span class="text-white">12 Today</span>*@
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-purple">
+            <i class="far fa-user float-right text-white"></i>
+
+            <h6 class="text-white text-uppercase m-b-20">Chỉ Tiêu</h6>
+            <h1 class="m-b-20 text-white counter">@data1.First().ChiTieu</h1>
+            @*<span class="text-white">12 Today</span>*@
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-warning">
+            <i class="fas fa-user-check float-right text-white"></i>
+
+            <h6 class="text-white text-uppercase m-b-20">Online</h6>
+            <h1 class="m-b-20 text-white counter">@data1.First().Online</h1>
+            @*<span class="text-white">25 Today</span>*@
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-warning">
+            <i class="fas fa-user-times float-right text-white"></i>
+            <h6 class="text-white text-uppercase m-b-20">Ofline</h6>
+            <h1 class="m-b-20 text-white counter">@data1.First().Ofline</h1>
+            @*<span class="text-white">25 Today</span>*@
+        </div>
+    </div>
+
+    <br />
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3><i class="fas fa-table"></i> Bảng thống kê thông tin điểm danh</h3>
+            Thông tin điểm danh của giảng viên trong 1 kỳ, bao gồm số ngày vắng và số ngày dạy
+
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="border:1px solid;text-align:center">Ngày</th>
+                            <th style="border:1px solid;text-align:center">Thứ</th>
+                            <th style="border:1px solid;text-align:center">Buổi</th>
+                            <th style="border:1px solid;text-align:center">Lớp</th>
+                            <th style="border:1px solid;text-align:center">Môn</th>
+                            <th style="border:1px solid;text-align:center">Tiết</th>
+                            <th style="border:1px solid;text-align:center">Giờ</th>
+                            <th style="border:1px solid;text-align:center">Địa Chỉ IP</th>
+                            <th style="border:1px solid;text-align:center">Trạng Thái</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <th style="font-weight:normal;border:1px solid">@item.Ngay</th>
+                                <th style="font-weight:normal;border:1px solid">@item.Thu</th>
+                                <th style="font-weight:normal;border:1px solid">@item.Buoi</th>
+                                <th style="font-weight:normal;border:1px solid">@item.TenLop</th>
+                                <th style="font-weight:normal;border:1px solid">@item.TenMonHoc</th>
+                                <th style="font-weight:normal;border:1px solid">@item.TenTiet</th>
+                                <th style="font-weight:normal;border:1px solid">@item.Gio</th>
+                                <th style="font-weight:normal;border:1px solid">@item.IP</th>
+                                <th style="font-weight:normal;border:1px solid">@item.TrangThai</th>
+                            </tr>
+                        }
+                    </thead>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+

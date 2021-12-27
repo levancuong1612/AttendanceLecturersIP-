@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@model List<CSDL.ViewModel.ViewGiangVien>
+<div class="content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcrumb-holder">
+                    <h1 class="main-title float-left">Giảng Viên</h1>
+                    <ol class="breadcrumb float-right">
+                        Số Lượng:@Model.Count()
+                    </ol>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div style=" display:flex;justify-content: space-between;" class="card mb-3">
+                @using (Html.BeginForm("Index", "GiangVien", FormMethod.Get))
+                {
+
+                    <div style="width:300px" class="input-group">
+                        <div class="input-group">
+                            <input type="text" name="searchString" class="form-control" placeholder="  Nhập thông tin tìm kiếm......" />
+
+                            <input type="submit" value="Tìm kiếm" class="btn btn-primary" />
+                        </div>
+                    </div>
+                
+                }
+                </div>
+            <!-- end card-->
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <span class="pull-right">
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user">
+                                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+                            </button>
+                        </span>
+                        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    @using (Html.BeginForm("Create", "GiangVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        //Model.First().TenGiangVien = "";
+                                        Model.First().DiaChi = "";
+                                        Model.First().MaChucVu = 0;
+                                        Model.First().GioiTinh = "";
+                                        @Html.AntiForgeryToken()
+                                        <form action="#" method="post" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thêm Giảng Viên</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    <span class="sr-only">Close</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Tên Giảng Viên</label>
+
+                                                            @Html.EditorFor(model => model.First().TenGiangVien, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.First().TenGiangVien, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Giới Tính</label>
+                                                            @Html.DropDownListFor(model => model.First().GioiTinh, new List<SelectListItem>
+                                                              {
+                                                                   new SelectListItem{Text="- Chọn Giới Tính -",Selected=true},
+                                                                   new SelectListItem{Text="Nam",},
+                                                                   new SelectListItem{Text="Nữ",},
+                                                                }, htmlAttributes: new { @class = "form-control" })
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+
+                                                        <div class="form-group">
+                                                            <label>Ngày Sinh</label>
+                                                            @Html.EditorFor(model => model.First().NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.First().NgaySinh, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Địa Chỉ</label>
+                                                            @Html.EditorFor(model => model.First().DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.First().DiaChi, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Số Điện Thoại</label>
+                                                            @Html.EditorFor(model => model.First().SDT, new { htmlAttributes = new { @class = "form-control", @inputmode = "tel" } })
+                                                            @Html.ValidationMessageFor(model => model.First().SDT, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Hình Ảnh</label>
+                                                            <input type="file" name="file" id="file" style="width: 100%;" />
+                                                            @Html.ValidationMessageFor(model => model.First().HinhAnh, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Khoa</label><br />
+                                                            @Html.DropDownListFor(model => model.First().MaKhoa, null, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.First().MaKhoa, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Chức Vụ</label><br />
+                                                            @Html.DropDownListFor(model => model.First().MaChucVu, null, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.First().MaChucVu, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Bộ Môn</label>
+                                                            @Html.DropDownListFor(model => model.First().MaBoMon, null, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.First().MaBoMon, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>Trạng Thái</label>
+                                                            @Html.DropDownListFor(model => model.First().TrangThai, new List<SelectListItem>
+                                              {
+                                                   new SelectListItem{Text="- Chọn Trạng Thái -",Selected=true},
+                                                   new SelectListItem{Text="Đang Dạy",},
+                                                   new SelectListItem{Text="Ngưng Dạy",},
+
+                                                }, htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.First().TrangThai, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input style="background-color:#3a73d1" type="submit" value="Thêm Giảng Viên" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <h3>
+                            <i class="far fa-user"></i> Danh Sách Giảng Viên
+                        </h3>
+                    </div>
+                    <!-- end card-header -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width:250px">Thông Tin Giảng Viên</th>
+                                        <th style="width:170px">Khoa</th>
+                                        <th style="width:150px;">Thao Tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        string b = item.TenGiangVien;
+                                        <tr>
+                                            <td>
+                                                @{string a = @item.HinhAnh;
+
+
+                                                    <div class="user_avatar_list d-none d-none d-lg-block"><img alt="image" src="~/Img/@a" /></div>
+                                                }
+                                                <h4>@b</h4>
+                                                <p>Chức Vụ:@item.TenChucVu</p>
+                                            </td>
+                                            <td>@item.TenKhoa</td>
+                                            <td>
+                                                <a href="../Admin/GiangVien/ThongTin/@item.MaGV" class="btn btn-danger btn-sm btn-block mt-2"><i class="fas fa-user"></i> Xem</a>
+                                                
+                                                <a href="../Admin/GiangVien/Edit?MaGV=@item.MaGV" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                                <div style="background-color:#ed4b4b;height:30.8px;border-radius:.25rem;text-align:center;color:white;margin-top:10px">
+                                                    @Ajax.ActionLink("Xóa", "xoa", new { @id = item.MaGV }, new AjaxOptions
+                                                         {
+                                                         Confirm = "Bạn có muốn xóa người dùng này?",
+                                                         OnComplete = "$('#row_" + item.MaGV + "').remove()",
+                                                        HttpMethod = "Delete"
+                                                         })</div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end card-body -->
+
+                </div>
+                <!-- end card -->
+
+            </div>
+            <!-- end col -->
+
+        </div>
+        <!-- end row -->
+
+    </div>
+    <!-- END container-fluid -->
+
+</div>

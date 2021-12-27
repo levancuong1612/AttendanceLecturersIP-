@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.EF.TBL_Tuan>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Tuần Học</h1>
+
+    <div class="clearfix"></div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <span class="pull-right">
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_user1">
+                <i class="fas fa-user-plus" aria-hidden="true"></i> Thêm Mới
+            </button>
+        </span>
+        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    @using (Html.BeginForm("Create", "TuanHoc", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Cập Nhật Lịch Tuần</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Ngày Bắt Đầu</label>
+                                            @Html.EditorFor(model => model.First().TuNgay, new { htmlAttributes = new { @class = "form-control" ,@type= "date" } })
+                                            @Html.ValidationMessageFor(model => model.First().TuNgay, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Số Tuần</label>
+                                            @Html.EditorFor(model => model.First().TrangThai, new { htmlAttributes = new { @class = "form-control" ,@type="number" } })
+                                            @Html.ValidationMessageFor(model => model.First().TrangThai, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="Thêm" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    </div>
+            </div>
+        </div>
+        <h3><i class="fas fa-table"></i> Bảng Tham Chiếu Tuần    </h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="border: solid 1px;width:10%; text-align: center">Tuần</th>
+                        <th style="border: solid 1px;width:30%; text-align: center">Từ Ngày</th>
+                        <th style="border: solid 1px; width:30%;  text-align: center">Đến Ngày</th>
+                        <th style="border: solid 1px; text-align: center">Trạng Thái </th>
+                        <th style="border: solid 1px;width:15%; text-align: center">Thao Tác </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string tuNgay = item.TuNgay.Value.Day.ToString() + "/" + item.TuNgay.Value.Month.ToString() + "/" + item.TuNgay.Value.Year.ToString();
+                        string denNgay = item.DenNgay.Value.Day.ToString() + "/" + item.DenNgay.Value.Month.ToString() + "/" + item.DenNgay.Value.Year.ToString();
+                        if (item.TuNgay <= DateTime.Now.Date && item.DenNgay >= DateTime.Now.Date)
+                        {
+                            <tr style="color:black;background-color:#a4a2a2">
+                                <td style="border:solid 1px ; font-weight:normal; text-align: center">@item.Tuan </td>
+                                <td style="border: solid 1px; font-weight: normal; text-align: center">@tuNgay</td>
+                                <td style="border: solid 1px; font-weight: normal;text-align: center ">@denNgay</td>
+                                <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TrangThai</td>
+                                <td>
+                                    <a href="../TuanHoc/Edit?MaKhoa=@item.MaTuan" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                    <a href="#" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr style="color:black">
+                                <td style="border:solid 1px ; font-weight:normal; text-align: center">@item.Tuan </td>
+                                <td style="border: solid 1px; font-weight: normal; text-align: center">@tuNgay</td>
+                                <td style="border: solid 1px; font-weight: normal;text-align: center ">@denNgay</td>
+                                <td style="border: solid 1px; font-weight: normal; text-align: center">@item.TrangThai</td>
+                                <td>
+                                    <a href="../TuanHoc/Edit?MaKhoa=@item.MaTuan" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                    <a href="#" class="btn btn-primary btn-sm btn-block"><i class="far fa-edit"></i> Chỉnh Sửa</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end card-body-->
+</div>

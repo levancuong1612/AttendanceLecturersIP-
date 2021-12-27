@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+@model List<CSDL.ViewModel.ViewChiTietDiemDanh>
+<div class="breadcrumb-holder">
+    <h1 class="main-title float-left">Dashboard</h1>
+    <ol class="breadcrumb float-right">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+    <div class="clearfix"></div>
+</div>
+
+<div style="background-color:white" class="row">
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-danger">
+            <i class="far fa-user float-right text-white"></i>
+            <h6 class="text-white text-uppercase m-b-20">Tổng Số</h6>
+            <h1 class="m-b-20 text-white counter">@Model.Count()</h1>
+            @*<span class="text-white">12 Today</span>*@
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-purple">
+            <i class="fas fa-user-check float-right text-white"></i>
+            <h6 class="text-white text-uppercase m-b-20">Online</h6>
+            <h1 class="m-b-20 text-white counter">@Model.Where(x=>x.TrangThai=="Đã Dạy").Count()</h1>
+            @*<span class="text-white">12 Today</span>*@
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-warning">
+            <i class="fas fa-user-times float-right text-white"></i>
+            <h6 class="text-white text-uppercase m-b-20">Ofline</h6>
+            <h1 class="m-b-20 text-white counter">@Model.Where(x => x.TrangThai == "Chưa Dạy").Count()</h1>
+            @*<span class="text-white">25 Today</span>*@
+        </div>
+    </div>
+
+   
+
+    <div class="table-responsive">
+        <h3 style="margin-left:2%">Bảng Giảng Viên Online</h3>
+        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+            <thead>
+                <tr>
+                    
+                    <th style="border:1px solid;text-align:center">Thứ</th>
+                    <th style="border:1px solid;text-align:center">Buổi</th>
+                    <th style="border:1px solid;text-align:center">Lớp</th>
+                    <th style="border:1px solid;text-align:center">Môn</th>
+                    <th style="border:1px solid;text-align:center">Tiết</th>
+                    <th style="border:1px solid;text-align:center">Giờ</th>
+                    <th style="border:1px solid;text-align:center">Địa Chỉ IP</th>
+                    <th style="border:1px solid;text-align:center">Trạng Thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.TrangThai == "Đã Dạy") { 
+                <tr>
+            
+                    <th style="font-weight:normal;border:1px solid">@item.Thu</th>
+                    <th style="font-weight:normal;border:1px solid">@item.Buoi</th>
+                    <th style="font-weight:normal;border:1px solid">@item.TenLop</th>
+                    <th style="font-weight:normal;border:1px solid">@item.TenMonHoc</th>
+                    <th style="font-weight:normal;border:1px solid">@item.TenTiet</th>
+                    <th style="font-weight:normal;border:1px solid">@item.Gio</th>
+                    <th style="font-weight:normal;border:1px solid">@item.IP</th>
+                    <th style="font-weight:normal;border:1px solid">@item.TrangThai</th>
+                </tr>
+                    }
+                }
+            </tbody>
+              
+           
+        </table>
+    </div>
+
+    <div class="table-responsive">
+        <br /><br /><br /><br />
+        <h3 style="margin-left:2%">Bảng Giảng Viên Ofline</h3>
+        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+            <thead>
+                <tr>
+                  
+                    <th style="border:1px solid;text-align:center">Thứ</th>
+                    <th style="border:1px solid;text-align:center">Buổi</th>
+                    <th style="border:1px solid;text-align:center">Lớp</th>
+                    <th style="border:1px solid;text-align:center">Môn</th>
+                    <th style="border:1px solid;text-align:center">Tiết</th>
+                    <th style="border:1px solid;text-align:center">Giờ</th>
+                    <th style="border:1px solid;text-align:center">Địa Chỉ IP</th>
+                    <th style="border:1px solid;text-align:center">Trạng Thái</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    if (item.TrangThai == "Chưa Dạy")
+                    {
+                        <tr>
+                           
+                            <th style="font-weight:normal;border:1px solid">@item.Thu</th>
+                            <th style="font-weight:normal;border:1px solid">@item.Buoi</th>
+                            <th style="font-weight:normal;border:1px solid">@item.TenLop</th>
+                            <th style="font-weight:normal;border:1px solid">@item.TenMonHoc</th>
+                            <th style="font-weight:normal;border:1px solid">@item.TenTiet</th>
+                            <th style="font-weight:normal;border:1px solid">@item.Gio</th>
+                            <th style="font-weight:normal;border:1px solid">@item.IP</th>
+                            <th style="font-weight:normal;border:1px solid">@item.TrangThai</th>
+                        </tr>
+                    }
+                }
+               
+            </tbody>
+                
+            
+        </table>
+    </div>
+
+</div>
